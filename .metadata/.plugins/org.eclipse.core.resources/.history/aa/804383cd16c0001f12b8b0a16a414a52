@@ -1,0 +1,33 @@
+package com.cdac.acts;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class AppTest {
+    public static void main(String[] args) {
+       
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://testpages.eviltester.com/styled/validation/input-validation.html");
+
+        driver.findElement(By.id("firstname")).sendKeys("Yash");
+        driver.findElement(By.id("surname")).sendKeys("Kharcheee");
+        driver.findElement(By.id("age")).sendKeys("23");
+        driver.findElement(By.id("country")).sendKeys("India");
+        driver.findElement(By.id("notes")).sendKeys("Hii I am Yash Kharche from India");
+
+        String errorMessage=driver.findElement(By.xpath("/html/body/div/div[3]/form/label[4]")).getText();
+        if(!errorMessage.isEmpty()) {
+        	System.out.println(errorMessage);
+        }
+        
+        
+        driver.findElement(By.xpath("/html/body/div/div[3]/form/input[4]")).click();
+        
+        
+        String validationReport = driver.findElement(By.id("firstname-error")).getText();
+        System.out.println("Validation Report: " + validationReport);
+
+        driver.quit();
+    }
+}
